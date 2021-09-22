@@ -35,6 +35,7 @@
 // <----- PERIODS ----->
 
 #define TIME_READ_JOY_MS  10
+#define TIME_SEND_DATA_MS 10
 #define TIME_FLASH_MS     500
 #define TIME_VOLT_MS      2000
 
@@ -43,6 +44,10 @@
 // DATA
 #define SIZE_OF_DATA    6
 #define SIZE_OF_ACK     1
+
+#define DATA_MIN        0
+#define DATA_AVRG       1
+#define DATA_MAX        2
 
 // LCD
 #define LCD_LEFT_POS    10
