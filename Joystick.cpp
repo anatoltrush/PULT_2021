@@ -1,4 +1,4 @@
-#include "JOYSTICK.hpp"
+#include "Joystick.hpp"
 
 Joystick::Joystick(uint8_t x_p, uint8_t y_p, uint8_t sw_p, bool is_lft) :
   x_pin(x_p), y_pin(y_p),
