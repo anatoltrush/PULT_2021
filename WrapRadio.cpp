@@ -31,15 +31,40 @@ void WrapRadio::init() {
   }
 }
 
-void WrapRadio::sendTimer(uint32_t ms) {
+bool WrapRadio::sendTimer(const void* data, void* ack, uint32_t ms) {
   if (millis() - prev_ms_send >= ms) {
-    #ifdef DEBUG_RADIO
+#ifdef DEBUG_RADIO
     Serial.print(millis() - prev_ms_send);
     Serial.print("_");
     Serial.println(__func__);
 #endif
     prev_ms_send = millis();
     //_________________________
-    // TODO: implement
+    if (radio->write(data, SIZE_OF_DATA)) {
+      if (radio->available()) { // READ ACK
+        while (radio->available()) {
+          radio->read(ack, SIZE_OF_ACK);
+          // do smthng
+#ifdef DEBUG_RADIO
+          /*uint8_t ack_mass[SIZE_OF_ACK] = {0};
+          for (int i = 0; i < SIZE_OF_ACK; i++)
+            &ack_mass[i] = ack[i];*/
+          //uint8_t* ack_mass[SIZE_OF_ACK] = ack;
+          Serial.print("Answer: "); Serial.println(*(reinterpret_cast<uint8_t*>(ack)));
+#endif //DEBUG_RADIO
+        }
+      }
+      else {
+#ifdef DEBUG_RADIO
+        Serial.println("Empty ack");
+#endif //DEBUG_RADIO
+      }
+    }
+    else {
+      //volt.is_conn = false;
+#ifdef DEBUG_RADIO
+      Serial.println("Connection error");
+#endif // DEBUG_RADIO
+    }
   }
 }

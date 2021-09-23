@@ -13,6 +13,7 @@ Joystick joy_left(PIN_JOY_LEFT_X, PIN_JOY_LEFT_Y, PIN_JOY_LEFT_SW, true);
 Joystick joy_right(PIN_JOY_RIGHT_X, PIN_JOY_RIGHT_Y, PIN_JOY_RIGHT_SW, false);
 
 uint8_t msg_data[SIZE_OF_DATA] = {0};
+uint8_t ack_data[SIZE_OF_ACK] = {0};
 
 void setup() {
   lcd.begin(16, 2);
@@ -34,5 +35,7 @@ void loop() {
   joy_left.on_lcd(lcd, msg_data[0], msg_data[1], msg_data[2], TIME_READ_JOY_MS);
   joy_right.on_lcd(lcd, msg_data[3], msg_data[4], msg_data[5], TIME_READ_JOY_MS);
 
-  wrapradio.sendTimer(TIME_SEND_DATA_MS);
+  wrapradio.sendTimer(&msg_data, &ack_data, TIME_SEND_DATA_MS);
 }
+
+// right place of bytes on pult

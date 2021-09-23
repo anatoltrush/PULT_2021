@@ -19,7 +19,7 @@ class WrapRadio
     ~WrapRadio();
 
     void init();
-    void sendTimer(uint32_t ms);
+    bool sendTimer(const void* data, void* ack, uint32_t ms);
 
   private:
     uint32_t prev_ms_send = 0;
