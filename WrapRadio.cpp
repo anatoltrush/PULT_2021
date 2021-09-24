@@ -1,12 +1,10 @@
 #include "WrapRadio.hpp"
 
-WrapRadio::WrapRadio()
-{
+WrapRadio::WrapRadio(){
   radio = new RF24(PIN_NRF_CE, PIN_NRF_CS);
 }
 
-WrapRadio::~WrapRadio()
-{
+WrapRadio::~WrapRadio(){
   delete radio;
 }
 
