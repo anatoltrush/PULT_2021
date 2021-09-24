@@ -1,10 +1,10 @@
 #include "WrapRadio.hpp"
 
-WrapRadio::WrapRadio(){
+WrapRadio::WrapRadio() {
   radio = new RF24(PIN_NRF_CE, PIN_NRF_CS);
 }
 
-WrapRadio::~WrapRadio(){
+WrapRadio::~WrapRadio() {
   delete radio;
 }
 
@@ -44,11 +44,8 @@ bool WrapRadio::sendTimer(const void* data, void* ack, uint32_t ms) {
           radio->read(ack, SIZE_OF_ACK);
           // do smthng
 #ifdef DEBUG_RADIO
-          /*uint8_t ack_mass[SIZE_OF_ACK] = {0};
-          for (int i = 0; i < SIZE_OF_ACK; i++)
-            &ack_mass[i] = ack[i];*/
-          //uint8_t* ack_mass[SIZE_OF_ACK] = ack;
-          Serial.print("Answer: "); Serial.println(*(reinterpret_cast<uint8_t*>(ack)));
+          uint8_t* uint8_t_ack = static_cast<uint8_t*>(ack);
+          Serial.print("Answer: "); Serial.println((int)uint8_t_ack[0]); // enter number of byte
 #endif //DEBUG_RADIO
         }
       }

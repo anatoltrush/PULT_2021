@@ -12,7 +12,7 @@ WrapRadio wrapradio;
 Joystick joy_left(PIN_JOY_LEFT_X, PIN_JOY_LEFT_Y, PIN_JOY_LEFT_SW, true);
 Joystick joy_right(PIN_JOY_RIGHT_X, PIN_JOY_RIGHT_Y, PIN_JOY_RIGHT_SW, false);
 
-uint8_t msg_data[SIZE_OF_DATA] = {0};
+uint8_t msg_data[SIZE_OF_DATA] = {0}; // left[1]throttle, left[0]yaw, right[4]pitch, right[3]roll
 uint8_t ack_data[SIZE_OF_ACK] = {0};
 
 void setup() {
@@ -38,4 +38,7 @@ void loop() {
   wrapradio.sendTimer(&msg_data, &ack_data, TIME_SEND_DATA_MS);
 }
 
-// right place of bytes on pult
+//TODO:
+// wrap LCD
+// isMaxReached warning - implement in extra
+// cut off pipes in wi-fi (with test)
