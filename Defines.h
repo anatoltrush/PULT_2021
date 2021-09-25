@@ -1,5 +1,5 @@
-#ifndef DEFINES_HPP
-#define DEFINES_HPP
+#ifndef DEFINES_H
+#define DEFINES_H
 
 #include <Arduino.h>
 
@@ -34,8 +34,8 @@
 
 // <----- PERIODS ----->
 
-#define TIME_READ_JOY_MS  10
-#define TIME_SEND_DATA_MS 10
+#define TIME_READ_JOY_MS  15
+#define TIME_SEND_DATA_MS 15
 #define TIME_FLASH_MS     500
 #define TIME_VOLT_MS      2000
 
@@ -43,7 +43,7 @@
 
 // DATA
 #define SIZE_OF_DATA    6
-#define SIZE_OF_ACK     2
+#define SIZE_OF_ACK     3
 
 #define DATA_MIN        0
 #define DATA_AVRG       1
@@ -62,4 +62,4 @@
 #define LOW_VOLT        6.6
 #define MAX_VOLT        8.4
 
-#endif // DEFINES_HPP
+#endif // DEFINES_H

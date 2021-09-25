@@ -1,4 +1,4 @@
-#include "WrapRadio.hpp"
+#include "WrapRadio.h"
 
 WrapRadio::WrapRadio() {
   radio = new RF24(PIN_NRF_CE, PIN_NRF_CS);
@@ -10,15 +10,13 @@ WrapRadio::~WrapRadio() {
 
 void WrapRadio::init() {
   if (radio != NULL) {
-    uint8_t address[][6] = {"1Node", "2Node", "3Node", "4Node", "5Node", "6Node"};
-
     radio->begin();
     radio->setAutoAck(true);
-    radio->setRetries(5, 1);
+    radio->setRetries(5, 1); // delay, count
     radio->enableAckPayload();
     radio->setPayloadSize(SIZE_OF_DATA);
 
-    radio->openWritingPipe(address[0]);
+    radio->openWritingPipe(0x7878787878LL);
     radio->setChannel(0x60);
 
     radio->setPALevel(RF24_PA_MAX); // RF24_PA_MIN, RF24_PA_LOW, RF24_PA_HIGH, RF24_PA_MAX

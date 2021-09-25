@@ -1,14 +1,13 @@
-#include <LiquidCrystal.h>
-
-#include "InitLCD.hpp"
-#include "Extra.hpp"
-#include "WrapRadio.hpp"
-#include "Joystick.hpp"
+#include "WrapLCD.h"
+#include "Extra.h"
+#include "WrapRadio.h"
+#include "Joystick.h"
 
 LiquidCrystal lcd(PIN_LCD_RS, PIN_LCD_EN, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
 Extra extra(PIN_FLASH, PIN_VOLT);
 WrapRadio wrapradio;
+WrapLCD wrapLCD(lcd);
 Joystick joy_left(PIN_JOY_LEFT_X, PIN_JOY_LEFT_Y, PIN_JOY_LEFT_SW, true);
 Joystick joy_right(PIN_JOY_RIGHT_X, PIN_JOY_RIGHT_Y, PIN_JOY_RIGHT_SW, false);
 
@@ -17,7 +16,7 @@ uint8_t ack_data[SIZE_OF_ACK] = {0};
 
 void setup() {
   lcd.begin(16, 2);
-  lcd_initialization(lcd);
+  wrapLCD.lcd_initialization(lcd);
 
   Serial.begin(115200);
 
@@ -39,6 +38,5 @@ void loop() {
 }
 
 //TODO:
-// wrap LCD
-// isMaxReached warning - implement in extra
-// cut off pipes in wi-fi (with test)
+// isMaxReached warning - implement in extra + LCD
+// 3 ack which motor is max?

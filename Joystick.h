@@ -1,9 +1,9 @@
-#ifndef JOYSTICK_HPP
-#define JOYSTICK_HPP
+#ifndef JOYSTICK_H
+#define JOYSTICK_H
 
 #include <LiquidCrystal.h>
 
-#include "Defines.hpp"
+#include "Defines.h"
 
 //#define DEBUG_JOY
 #define IS_1_0_DATA
@@ -27,4 +27,4 @@ public:
 	void readData(uint8_t& dataX, uint8_t& dataY, uint8_t& dataSW, uint32_t ms);
 	void on_lcd(LiquidCrystal& lcd, uint8_t x, uint8_t y, uint8_t sw, uint32_t ms);
 };
-#endif // JOYSTICKPP
+#endif // JOYSTICK

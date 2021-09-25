@@ -1,4 +1,4 @@
-#include "Joystick.hpp"
+#include "Joystick.h"
 
 Joystick::Joystick(uint8_t x_p, uint8_t y_p, uint8_t sw_p, bool is_lft) :
   x_pin(x_p), y_pin(y_p),
@@ -43,15 +43,15 @@ void Joystick::readData(uint8_t& dataX, uint8_t& dataY, uint8_t& dataSW, uint32_
     dataSW = 255 - dataSW;
 
 #ifdef IS_1_0_DATA
-    if (dataX < 90) dataX = DATA_MIN;
-    else if (dataX > 170) dataX = DATA_MAX;
+    if (dataX < 80) dataX = DATA_MIN;
+    else if (dataX > 180) dataX = DATA_MAX;
     else dataX = DATA_AVRG;
 
-    if (dataY < 90) dataY = DATA_MIN;
-    else if (dataY > 170) dataY = DATA_MAX;
+    if (dataY < 80) dataY = DATA_MIN;
+    else if (dataY > 180) dataY = DATA_MAX;
     else dataY = DATA_AVRG;
 
-    dataSW = (dataSW > 170) ? DATA_MAX : DATA_MIN;
+    dataSW = (dataSW > 180) ? DATA_MAX : DATA_MIN;
 #endif
 #ifdef DEBUG_JOY
     Serial.print(millis() - prev_mills_calc);
