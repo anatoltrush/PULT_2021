@@ -21,7 +21,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
     0b01000,
     0b00000
   };
-  uint8_t pult[8] = {  // 2
+  uint8_t pult[8] = { // 2
     0b00100,
     0b00100,
     0b00100,
@@ -31,7 +31,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
     0b10001,
     0b11111
   };
-  uint8_t connection[8] = {  // 3
+  uint8_t connection[8] = { // 3
     0b11111,
     0b10000,
     0b11110,
@@ -41,7 +41,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
     0b11000,
     0b10000
   };
-  uint8_t lev2[8] = {  // 4
+  uint8_t lev2[8] = { // 4
     0b00000,
     0b00000,
     0b00000,
@@ -51,7 +51,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
     0b11111,
     0b11111
   };
-  uint8_t lev3[8] = {  // 5
+  uint8_t lev3[8] = { // 5
     0b00000,
     0b00000,
     0b11111,
@@ -61,7 +61,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
     0b11111,
     0b11111
   };
-  uint8_t lev4[8] = {  // 6
+  uint8_t lev4[8] = { // 6
     0b11111,
     0b11111,
     0b11111,
@@ -92,7 +92,7 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
   lcd.createChar(7, empty);
 }
 
-void WrapLCD::lcd_initialization(LiquidCrystal& lcd) {
+void WrapLCD::lcdInitialization(LiquidCrystal& lcd) {
   lcd.setCursor(1, 0);
   lcd.print("REMOTE CONTROL");
   lcd.setCursor(1, 1);
@@ -137,4 +137,33 @@ void WrapLCD::lcd_initialization(LiquidCrystal& lcd) {
   lcd.write("_");
   lcd.setCursor(15, 1);
   lcd.write("_");
+}
+
+void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
+  if (millis() - prev_millis_warn_max >= ms) {
+#ifdef DEBUG_LCD
+    Serial.print(millis() - prev_millis_warn_max);
+    Serial.print("_");
+    Serial.print(__func__);
+    Serial.print("_");
+    Serial.println(ack_data[1]);
+#endif
+    prev_millis_warn_max = millis();
+    //_________________________
+    // 0 volt
+
+    // 1 is max reached & 2 number ofmotor
+    if (ack_data[1] != 0) {
+      lcd.setCursor(14, 0);
+      (warnState) ? lcd.write("!") : lcd.write(" ");
+      warnState = ! warnState;
+      //_____
+      lcd.setCursor(15, 0);
+      lcd.print(ack_data[2]);
+    }
+    else {
+      lcd.setCursor(14, 0);
+      lcd.write("--");
+    }
+  }
 }

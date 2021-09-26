@@ -8,15 +8,15 @@
 class Extra
 {
   private:
-    uint8_t flash_pin = PIN_FLASH;
-    uint8_t volt_pin  = PIN_VOLT;
+    uint8_t flashPin = PIN_FLASH;
+    uint8_t voltPin  = PIN_VOLT;
 
     uint8_t percent   = 0;
 
     uint32_t prev_ms_flash = 0;
     uint32_t prev_ms_volt = 0;
 
-    bool led_state = false;
+    bool ledState = false;
 
     float signal        = 0.0f;
 
@@ -26,7 +26,7 @@ class Extra
     float output        = 0.0f;
 
     void flash(uint32_t ms);
-    void get_volt(uint32_t ms);
+    void getVolt(uint32_t ms);
 };
 
 #endif // EXTRA_H

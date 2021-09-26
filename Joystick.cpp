@@ -71,7 +71,7 @@ void Joystick::readData(uint8_t& dataX, uint8_t& dataY, uint8_t& dataSW, uint32_
   }
 }
 
-void Joystick::on_lcd(LiquidCrystal& lcd, uint8_t x, uint8_t y, uint8_t sw, uint32_t ms) {
+void Joystick::onLcd(LiquidCrystal& lcd, uint8_t x, uint8_t y, uint8_t sw, uint32_t ms) {
   if (millis() - prev_mills_show >= ms) {
     uint8_t pos = 0;
     if (is_left) pos = LCD_LEFT_POS;

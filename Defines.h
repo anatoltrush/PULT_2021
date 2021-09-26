@@ -34,10 +34,11 @@
 
 // <----- PERIODS ----->
 
-#define TIME_READ_JOY_MS  15
-#define TIME_SEND_DATA_MS 15
-#define TIME_FLASH_MS     500
-#define TIME_VOLT_MS      2000
+#define TIME_READ_JOY_MS    20
+#define TIME_SEND_DATA_MS   20
+#define TIME_FLASH_MS       500
+#define TIME_VOLTAGE_MS     2000
+#define TIME_POWER_WARN_MS  400
 
 // <----- CONSTANT VALUES ----->
 

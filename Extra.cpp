@@ -1,9 +1,9 @@
 #include "Extra.h"
 
 Extra::Extra(uint8_t led_pin, uint8_t volt_pin):
-  flash_pin(led_pin), volt_pin(volt_pin) {
-  pinMode(flash_pin, OUTPUT);
-  pinMode(volt_pin, INPUT);
+  flashPin(led_pin), voltPin(volt_pin) {
+  pinMode(flashPin, OUTPUT);
+  pinMode(voltPin, INPUT);
 }
 
 void Extra::flash(uint32_t ms) {
@@ -15,13 +15,13 @@ void Extra::flash(uint32_t ms) {
 #endif
     prev_ms_flash = millis();
     //_________________________
-    (led_state == LOW) ? led_state = HIGH : led_state = LOW;
+    (ledState == LOW) ? ledState = HIGH : ledState = LOW;
 
-    digitalWrite(flash_pin, led_state);
+    digitalWrite(flashPin, ledState);
   }
 }
 
-void Extra::get_volt(uint32_t ms) {
+void Extra::getVolt(uint32_t ms) {
   if (millis() - prev_ms_volt >= ms) {
 #ifdef DEBUG_EXTRA
     Serial.print(millis() - prev_ms_volt);
@@ -30,7 +30,7 @@ void Extra::get_volt(uint32_t ms) {
 #endif
     prev_ms_volt = millis();
     //_________________________
-    signal = (analogRead(volt_pin) / 1024.0f) * MAX_INP_VOLT;
+    signal = (analogRead(voltPin) / 1024.0f) * MAX_INP_VOLT;
     float div_koeff = RESIST_2 / (RESIST_1 + RESIST_2); // = 0.375
     output = signal / div_koeff;
 
