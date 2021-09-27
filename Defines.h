@@ -39,6 +39,7 @@
 #define TIME_FLASH_MS       500
 #define TIME_VOLTAGE_MS     2000
 #define TIME_POWER_WARN_MS  400
+#define TIME_CONN_UPD_MS    2000
 
 // <----- CONSTANT VALUES ----->
 

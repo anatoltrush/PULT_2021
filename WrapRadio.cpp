@@ -27,21 +27,35 @@ void WrapRadio::init() {
   }
 }
 
+void WrapRadio::updCount() {
+  countAllTry++;
+  if (countAllTry >= allPackets - 1) {
+    connQualPerc = (countGoodTry * 100) / countAllTry;
+    if (connQualPerc >= 100)connQualPerc = 99;
+    countGoodTry = 0;
+    countAllTry = 0;
+    isConnQualReady = true;
+  }
+}
+
 bool WrapRadio::sendTimer(uint32_t ms) {
-  if (millis() - prev_ms_send >= ms) {
+  if (millis() - prevSendMs >= ms) {
 #ifdef DEBUG_RADIO
-    Serial.print(millis() - prev_ms_send);
+    Serial.print(millis() - prevSendMs);
     Serial.print("_");
     Serial.println(__func__);
 #endif
-    prev_ms_send = millis();
+    prevSendMs = millis();
+    //_________________________
+    updCount();
     //_________________________
     for (size_t i = 0; i < SIZE_OF_ACK; i++) // drop all ack
       ack_msg[i] = 0;
     //_________________________
-    if (radio->write(msg_data, SIZE_OF_DATA)) {
+    if (radio->write(msg_data, SIZE_OF_DATA)) { // ---> OK CONNECTION <---
+      countGoodTry++;
       if (radio->available()) { // READ ACK
-        while (radio->available()) {
+        while (radio->available()) { // OK ACK
           radio->read(ack_msg, SIZE_OF_ACK);
           // do smthng
 #ifdef DEBUG_RADIO
@@ -52,14 +66,13 @@ bool WrapRadio::sendTimer(uint32_t ms) {
 #endif //DEBUG_RADIO
         }
       }
-      else {
+      else { // NO ACK
 #ifdef DEBUG_RADIO
         Serial.println("Empty ack");
 #endif //DEBUG_RADIO
       }
     }
-    else {
-      //volt.is_conn = false;
+    else { // ---> NO CONNECTION <---
 #ifdef DEBUG_RADIO
       Serial.println("Connection error");
 #endif // DEBUG_RADIO

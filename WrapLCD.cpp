@@ -140,15 +140,15 @@ void WrapLCD::lcdInitialization(LiquidCrystal& lcd) {
 }
 
 void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
-  if (millis() - prev_millis_warn_max >= ms) {
+  if (millis() - prevMillisWarnMs >= ms) {
 #ifdef DEBUG_LCD
-    Serial.print(millis() - prev_millis_warn_max);
+    Serial.print(millis() - prevMillisWarnMs);
     Serial.print("_");
     Serial.print(__func__);
     Serial.print("_");
     Serial.println(ack_data[1]);
 #endif
-    prev_millis_warn_max = millis();
+    prevMillisWarnMs = millis();
     //_________________________
     // 0 volt
 
@@ -164,6 +164,25 @@ void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     else {
       lcd.setCursor(14, 0);
       lcd.write("--");
+    }
+  }
+}
+
+void WrapLCD::connQuality(LiquidCrystal& lcd, bool& isReady, uint8_t quality, uint32_t ms) {
+  if (millis() - prevMillisQualMs >= ms) {
+#ifdef DEBUG_LCD
+    Serial.print(millis() - prevMillisQualMs);
+    Serial.print("_");
+    Serial.print(__func__);
+    Serial.print("_");
+    Serial.println(quality);
+#endif
+    prevMillisQualMs = millis();
+    //_________________________
+    if (isReady) {
+      lcd.setCursor(12, 0);
+      lcd.print(quality);
+      isReady = false;
     }
   }
 }
