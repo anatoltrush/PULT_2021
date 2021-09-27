@@ -142,11 +142,11 @@ void WrapLCD::lcdInitialization(LiquidCrystal& lcd) {
 void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
   if (millis() - prevMillisWarnMs >= ms) {
 #ifdef DEBUG_LCD
-    Serial.print(millis() - prevMillisWarnMs);
+    /*Serial.print(millis() - prevMillisWarnMs);
     Serial.print("_");
     Serial.print(__func__);
     Serial.print("_");
-    Serial.println(ack_data[1]);
+    Serial.println(ack_data[1]);*/
 #endif
     prevMillisWarnMs = millis();
     //_________________________
@@ -180,7 +180,14 @@ void WrapLCD::connQuality(LiquidCrystal& lcd, bool& isReady, uint8_t quality, ui
     prevMillisQualMs = millis();
     //_________________________
     if (isReady) {
-      lcd.setCursor(12, 0);
+      if (quality < 10) {
+        lcd.setCursor(12, 0);
+        lcd.print(" ");
+        lcd.setCursor(13, 0);
+      }
+      else {
+        lcd.setCursor(12, 0);
+      }
       lcd.print(quality);
       isReady = false;
     }

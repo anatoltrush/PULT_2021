@@ -5,7 +5,7 @@
 
 #include "Defines.h"
 
-#define DEBUG_LCD
+//#define DEBUG_LCD
 
 class WrapLCD
 {

@@ -40,6 +40,7 @@
 #define TIME_VOLTAGE_MS     2000
 #define TIME_POWER_WARN_MS  400
 #define TIME_CONN_UPD_MS    2000
+#define TIME_CONN_LCD_MS    200
 
 // <----- CONSTANT VALUES ----->
 

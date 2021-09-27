@@ -59,7 +59,7 @@ bool WrapRadio::sendTimer(uint32_t ms) {
           radio->read(ack_msg, SIZE_OF_ACK);
           // do smthng
 #ifdef DEBUG_RADIO
-          uint8_t* uint8_t_ack = static_cast<uint8_t*>(ack);
+          uint8_t* uint8_t_ack = static_cast<uint8_t*>(ack_msg);
           Serial.print("Answer 0: "); Serial.println((int)uint8_t_ack[0]); // enter number of byte
           Serial.print("Answer 1: "); Serial.println((int)uint8_t_ack[1]);
           Serial.print("Answer 2: "); Serial.println((int)uint8_t_ack[2]);
