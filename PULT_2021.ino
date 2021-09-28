@@ -32,6 +32,7 @@ void loop() {
   joyRight.onLcd(lcd, wrapRadio.msg_data[3], wrapRadio.msg_data[4], wrapRadio.msg_data[5], TIME_READ_JOY_MS);
 
   wrapRadio.sendTimer(TIME_SEND_DATA_MS);
+  
   wrapLCD.analyzeACK(lcd, wrapRadio.ack_msg, TIME_POWER_WARN_MS);
   wrapLCD.connQuality(lcd, wrapRadio.isConnQualReady, wrapRadio.connQualPerc, TIME_CONN_LCD_MS);
 }

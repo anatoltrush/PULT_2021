@@ -143,28 +143,26 @@ void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
   if (millis() - prevMillisWarnMs >= ms) {
 #ifdef DEBUG_LCD
     /*Serial.print(millis() - prevMillisWarnMs);
-    Serial.print("_");
-    Serial.print(__func__);
-    Serial.print("_");
-    Serial.println(ack_data[1]);*/
+      Serial.print("_");
+      Serial.print(__func__);
+      Serial.print("_");
+      Serial.println(ack_data[1]);*/
 #endif
     prevMillisWarnMs = millis();
     //_________________________
     // 0 volt
 
     // 1 is max reached & 2 number ofmotor
+    lcd.setCursor(14, 0);
     if (ack_data[1] != 0) {
-      lcd.setCursor(14, 0);
       (warnState) ? lcd.write("!") : lcd.write(" ");
       warnState = ! warnState;
-      //_____
-      lcd.setCursor(15, 0);
-      lcd.print(ack_data[2]);
     }
     else {
-      lcd.setCursor(14, 0);
-      lcd.write("--");
+      lcd.write("-");
     }
+    lcd.setCursor(15, 0);
+    lcd.print(ack_data[2]);
   }
 }
 

@@ -56,13 +56,9 @@
 #define LCD_LEFT_POS    10
 #define LCD_RIGHT_POS   13
 
-// RESISTANCE
-#define RESIST_1        0.0f
-#define RESIST_2        0.0f
-
 // VOLTAGE
-#define MAX_INP_VOLT    5.0
-#define LOW_VOLT        6.6
-#define MAX_VOLT        8.4
+#define VOLT_DIV        119.07f
+#define VOLT_MIN        6.8f // 2 x 3.4V
+#define VOLT_MAX        8.4f // 2 x 4.2V
 
 #endif // DEFINES_H
