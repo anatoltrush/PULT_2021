@@ -38,6 +38,7 @@
 #define TIME_SEND_DATA_MS   20
 #define TIME_FLASH_MS       500
 #define TIME_VOLTAGE_MS     2000
+#define TIME_VOLT_LCD_MS    50
 #define TIME_POWER_WARN_MS  400
 #define TIME_CONN_UPD_MS    2000
 #define TIME_CONN_LCD_MS    200
@@ -58,7 +59,10 @@
 
 // VOLTAGE
 #define VOLT_DIV        119.07f
-#define VOLT_MIN        6.8f // 2 x 3.4V
-#define VOLT_MAX        8.4f // 2 x 4.2V
+#define VOLT_MIN_RC     6.6f // 2 x 3.6V
+#define VOLT_MAX_RC     8.4f // 2 x 4.2V
+
+#define VOLT_MIN_QD     10.05f // 3 x 3.35V
+#define VOLT_MAX_QD     12.6f // 3 x 4.2V
 
 #endif // DEFINES_H
