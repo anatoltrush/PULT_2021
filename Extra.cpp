@@ -66,6 +66,8 @@ void Extra::showVoltQuad(LiquidCrystal& lcd, uint32_t ms, uint8_t quadVolt) {
     }
     // ---abs---
     lcd.setCursor(5, 0);
+    lcd.print("     "); // clear prev print
+    lcd.setCursor(5, 0);
     dtostrf(quadVolt / 10.0f, 4, 1, CharQuad);
     if (quadVolt >= 10.0f) {
       for (int i = 0; i < 4; i++)
