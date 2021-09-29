@@ -38,7 +38,7 @@
 #define TIME_SEND_DATA_MS   20
 #define TIME_FLASH_MS       500
 #define TIME_VOLTAGE_MS     2000
-#define TIME_VOLT_LCD_MS    50
+#define TIME_VOLT_LCD_MS    100
 #define TIME_POWER_WARN_MS  400
 #define TIME_CONN_UPD_MS    2000
 #define TIME_CONN_LCD_MS    200
