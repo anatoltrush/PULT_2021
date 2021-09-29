@@ -27,6 +27,9 @@ void loop() {
   extra.flash(TIME_FLASH_MS); // heart beat
   extra.getVoltRc(TIME_VOLTAGE_MS);
 
+  extra.showVoltQuad(lcd, TIME_VOLT_LCD_MS, wrapRadio.ack_msg[0]);
+  extra.showVoltRemContrl(lcd, TIME_VOLT_LCD_MS);
+
   joyLeft.readData(wrapRadio.msg_data[0], wrapRadio.msg_data[1], wrapRadio.msg_data[2], TIME_READ_JOY_MS);
   joyRight.readData(wrapRadio.msg_data[3], wrapRadio.msg_data[4], wrapRadio.msg_data[5], TIME_READ_JOY_MS);
 
@@ -37,7 +40,4 @@ void loop() {
 
   wrapLCD.analyzeACK(lcd, wrapRadio.ack_msg, TIME_POWER_WARN_MS);
   wrapLCD.connQuality(lcd, wrapRadio.isConnQualReady, wrapRadio.connQualPerc, TIME_CONN_LCD_MS);
-
-  extra.showVoltQuad(lcd, TIME_VOLT_LCD_MS, wrapRadio.ack_msg[0]);
-  extra.showVoltRemContrl(lcd, TIME_VOLT_LCD_MS);
 }
