@@ -10,6 +10,9 @@
 class WrapRadio
 {
   public:
+    WrapRadio();
+    ~WrapRadio();
+
     RF24* radio = NULL;
 
     uint8_t pipeNum = 0;
@@ -20,11 +23,7 @@ class WrapRadio
     // left[1]throttle, left[0]yaw, right[4]pitch, right[3]roll
     uint8_t msg_data[SIZE_OF_DATA] = {0};
 
-    bool isConnQualReady = false;
     uint8_t connQualPerc = 0;
-
-    WrapRadio();
-    ~WrapRadio();
 
     void init();
     bool sendTimer(uint32_t ms);

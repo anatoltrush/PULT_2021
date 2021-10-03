@@ -166,7 +166,7 @@ void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
   }
 }
 
-void WrapLCD::connQuality(LiquidCrystal& lcd, bool& isReady, uint8_t quality, uint32_t ms) {
+void WrapLCD::connQuality(LiquidCrystal& lcd, uint8_t quality, uint32_t ms) {
   if (millis() - prevMillisQualMs >= ms) {
 #ifdef DEBUG_LCD
     Serial.print(millis() - prevMillisQualMs);
@@ -177,17 +177,14 @@ void WrapLCD::connQuality(LiquidCrystal& lcd, bool& isReady, uint8_t quality, ui
 #endif
     prevMillisQualMs = millis();
     //_________________________
-    if (isReady) {
-      if (quality < 10) {
-        lcd.setCursor(12, 0);
-        lcd.print(" ");
-        lcd.setCursor(13, 0);
-      }
-      else {
-        lcd.setCursor(12, 0);
-      }
-      lcd.print(quality);
-      isReady = false;
+    if (quality < 10) {
+      lcd.setCursor(12, 0);
+      lcd.print(" ");
+      lcd.setCursor(13, 0);
     }
+    else {
+      lcd.setCursor(12, 0);
+    }
+    lcd.print(quality);
   }
 }

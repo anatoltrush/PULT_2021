@@ -39,5 +39,5 @@ void loop() {
   wrapRadio.sendTimer(TIME_SEND_DATA_MS);
 
   wrapLCD.analyzeACK(lcd, wrapRadio.ack_msg, TIME_POWER_WARN_MS);
-  wrapLCD.connQuality(lcd, wrapRadio.isConnQualReady, wrapRadio.connQualPerc, TIME_CONN_LCD_MS);
+  wrapLCD.connQuality(lcd, wrapRadio.connQualPerc, TIME_CONN_LCD_MS);
 }
