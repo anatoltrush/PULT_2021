@@ -26,7 +26,7 @@ class WrapRadio
     uint8_t connQualPerc = 0;
 
     void init();
-    bool sendTimer(uint32_t ms);
+    void sendTimer(uint32_t ms);
 
   private:
     uint8_t countGoodTry = 0;
