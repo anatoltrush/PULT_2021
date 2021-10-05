@@ -1,8 +1,6 @@
 #ifndef WRAPLCD_H
 #define WRAPLCD_H
 
-#include <LiquidCrystal.h>
-
 #include "Defines.h"
 
 //#define DEBUG_LCD

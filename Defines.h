@@ -2,6 +2,7 @@
 #define DEFINES_H
 
 #include <Arduino.h>
+#include <LiquidCrystal.h>
 
 // <----- DIGITAL PINS ----->
 
@@ -52,6 +53,14 @@
 #define DATA_MIN        0
 #define DATA_AVRG       1
 #define DATA_MAX        2
+
+// BYTES MSG
+#define BT_MSG_YAW      0
+#define BT_MSG_THR      1
+#define BT_MSG_AUX1     2
+#define BT_MSG_ROLL     3
+#define BT_MSG_PTCH     4
+#define BT_MSG_AUX2     5
 
 // LCD
 #define LCD_LEFT_POS    10
