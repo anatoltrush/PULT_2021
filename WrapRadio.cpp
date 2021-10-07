@@ -108,7 +108,7 @@ void Extra::getVoltRc(uint32_t ms) {
     prevVoltGetMs = millis();
     //_________________________
     uint16_t readSignal = analogRead(voltPin);
-    voltResRc = (float)readSignal / VOLT_DIV;
+    voltResRc = ((float)readSignal - VOLT_COEFF_B) / VOLT_COEFF_K;
     // in percents
     float diffCurr = voltResRc - VOLT_MIN_RC;
     voltPercentRc = (diffCurr / diffMinMaxRc) * 100;
