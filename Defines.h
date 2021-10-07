@@ -67,9 +67,9 @@
 #define LCD_RIGHT_POS   13
 
 // VOLTAGE
-#define VOLT_COEFF_K    92.07f // MAGIC VALUE
-#define VOLT_COEFF_B    -79.796f // MAGIC VALUE
-#define VOLT_MIN_RC     6.6f // 2 x 3.6V
+#define VOLT_COEFF_K    114.129f // MAGIC VALUE
+#define VOLT_COEFF_B    -93.814f // MAGIC VALUE
+#define VOLT_MIN_RC     6.6f // 2 x 3.3V
 #define VOLT_MAX_RC     8.4f // 2 x 4.2V
 
 #define VOLT_MIN_QD     10.05f // 3 x 3.35V
