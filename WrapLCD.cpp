@@ -139,22 +139,20 @@ void WrapLCD::lcdInitialization(LiquidCrystal& lcd) {
   lcd.write("_");
 }
 
-void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
+void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
   if (millis() - prevMillisWarnMs >= ms) {
 #ifdef DEBUG_LCD
-    /*Serial.print(millis() - prevMillisWarnMs);
-      Serial.print("_");
-      Serial.print(__func__);
-      Serial.print("_");
-      Serial.println(ack_data[1]);*/
+    Serial.print(millis() - prevMillisWarnMs);
+    Serial.print("_");
+    Serial.print(__func__);
+    Serial.print("_");
+    Serial.println(ack_data[1]);
 #endif
     prevMillisWarnMs = millis();
     //_________________________
-    // 0 volt
-
-    // 1 is max reached & 2 number ofmotor
+    // 1 is max reached & 2 number of motor
     lcd.setCursor(14, 0);
-    if (ack_data[1] != 0) {
+    if (ack_data[BT_ACK_WARN] != 0) {
       (warnState) ? lcd.write("!") : lcd.write(" ");
       warnState = ! warnState;
     }
@@ -162,7 +160,11 @@ void WrapLCD::analyzeACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
       lcd.write("-");
     }
     lcd.setCursor(15, 0);
-    lcd.print(ack_data[2]);
+    lcd.print(ack_data[BT_ACK_NUME]);
+    // 3 main power
+    lcd.setCursor(10, 0);
+    if (ack_data[BT_ACK_POWR] < 10) lcd.print(ack_data[BT_ACK_POWR]);
+    else lcd.print("-");
   }
 }
 

@@ -17,7 +17,7 @@ class WrapRadio
 
     uint8_t pipeNum = 0;
 
-    // ACK bytes: 0 - quad volt, 1 - is max reached, 2 - num of motor
+    // ACK bytes: 0 - quad volt, 1 - is max reached, 2 - num of motor, 3 - main power
     uint8_t ack_msg[SIZE_OF_ACK] = {0};
 
     // left[1]throttle, left[0]yaw, right[4]pitch, right[3]roll

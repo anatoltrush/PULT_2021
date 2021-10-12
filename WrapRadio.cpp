@@ -57,13 +57,14 @@ void WrapRadio::sendTimer(uint32_t ms) {
           radio->read(ack_msg, SIZE_OF_ACK);
 #ifdef DEBUG_RADIO
           uint8_t* uint8_t_ack = static_cast<uint8_t*>(ack_msg);
-          Serial.print("Answer 0: "); Serial.println((int)uint8_t_ack[0]); // enter number of byte
-          Serial.print("Answer 1: "); Serial.println((int)uint8_t_ack[1]);
-          Serial.print("Answer 2: "); Serial.println((int)uint8_t_ack[2]);
+          Serial.print("Answer 0: "); Serial.println((int)uint8_t_ack[BT_ACK_VOLT]); // enter number of byte
+          Serial.print("Answer 1: "); Serial.println((int)uint8_t_ack[BT_ACK_WARN]);
+          Serial.print("Answer 2: "); Serial.println((int)uint8_t_ack[BT_ACK_NUME]);
 #endif //DEBUG_RADIO
         }
       }
       else { // NO ACK
+        ack_msg[BT_ACK_POWR] = 10;
 #ifdef DEBUG_RADIO
         Serial.println("Empty ack");
 #endif //DEBUG_RADIO
