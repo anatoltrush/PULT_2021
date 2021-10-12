@@ -146,7 +146,7 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     Serial.print("_");
     Serial.print(__func__);
     Serial.print("_");
-    Serial.println(ack_data[1]);
+    Serial.println(ack_data[BT_ACK_WARN]);
 #endif
     prevMillisWarnMs = millis();
     //_________________________
@@ -163,8 +163,12 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     lcd.print(ack_data[BT_ACK_NUME]);
     // 3 main power
     lcd.setCursor(10, 0);
-    if (ack_data[BT_ACK_POWR] < 10) lcd.print(ack_data[BT_ACK_POWR]);
-    else lcd.print("-");
+    if (ack_data[BT_ACK_POWR] >= 0 && ack_data[BT_ACK_POWR] < 10){
+      lcd.print(ack_data[BT_ACK_POWR]);
+      Serial.println(ack_data[BT_ACK_POWR]);
+    }
+    else
+    lcd.print("-");
   }
 }
 

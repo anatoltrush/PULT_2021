@@ -47,8 +47,9 @@ void WrapRadio::sendTimer(uint32_t ms) {
     //_________________________
     updCount();
     //_________________________
-    for (size_t i = 0; i < SIZE_OF_ACK; i++) // drop all ack
+    for (size_t i = 0; i < SIZE_OF_ACK; i++) // DROP ALL ACK
       ack_msg[i] = 0;
+    ack_msg[BT_ACK_POWR] = 10;
     //_________________________
     if (radio->write(msg_data, SIZE_OF_DATA)) { // ---> OK CONNECTION <---
       countGoodTry++;
@@ -64,7 +65,6 @@ void WrapRadio::sendTimer(uint32_t ms) {
         }
       }
       else { // NO ACK
-        ack_msg[BT_ACK_POWR] = 10;
 #ifdef DEBUG_RADIO
         Serial.println("Empty ack");
 #endif //DEBUG_RADIO
