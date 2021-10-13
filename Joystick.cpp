@@ -20,10 +20,8 @@ void Joystick::init() {
 
 #ifdef DEBUG_JOY
   is_left ? Serial.print("Left: ") : Serial.print("Right: ");
-  Serial.print(" | differ_x:");
-  Serial.print(differ_x);
-  Serial.print(" | differ_y:");
-  Serial.println(differ_y);
+  Serial.print(" | differ_x:"); Serial.print(differ_x);
+  Serial.print(" | differ_y:"); Serial.println(differ_y);
   Serial.println("JOYSTICK CALIBRATED!");
 #endif // DEBUG_JOY
 }
@@ -54,17 +52,12 @@ void Joystick::readData(uint8_t& dataX, uint8_t& dataY, uint8_t& dataSW, uint32_
     dataSW = (dataSW > 180) ? DATA_MAX : DATA_MIN;
 #endif
 #ifdef DEBUG_JOY
-    Serial.print(millis() - prev_mills_calc);
-    Serial.print("_");
-    Serial.print(__func__);
-    Serial.print("_");
+    Serial.print(millis() - prev_mills_calc); Serial.print("_");
+    Serial.print(__func__); Serial.print("_");
     is_left ? Serial.print("Left: ") : Serial.print("Right: ");
-    Serial.print("sigX:");
-    Serial.print(dataX);
-    Serial.print(" | sigY:");
-    Serial.print(dataY);
-    Serial.print(" | sigSW:");
-    Serial.print(dataSW);
+    Serial.print("sigX:"); Serial.print(dataX);
+    Serial.print(" | sigY:"); Serial.print(dataY);
+    Serial.print(" | sigSW:"); Serial.print(dataSW);
     Serial.println();
 #endif // DEBUG_JOY
     prev_mills_calc = millis();

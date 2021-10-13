@@ -5,7 +5,7 @@
 
 #include "Defines.h"
 
-//#define DEBUG_RADIO
+//#define DEBUG_RAD
 
 class WrapRadio
 {

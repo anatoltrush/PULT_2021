@@ -24,6 +24,9 @@ void WrapRadio::init() {
     radio->powerUp();
     radio->stopListening();
   }
+  else {
+    Serial.println("Null pointer in WrapRadio");
+  }
 }
 
 void WrapRadio::updCount() {
@@ -38,9 +41,8 @@ void WrapRadio::updCount() {
 
 void WrapRadio::sendTimer(uint32_t ms) {
   if (millis() - prevSendMs >= ms) {
-#ifdef DEBUG_RADIO
-    Serial.print(millis() - prevSendMs);
-    Serial.print("_");
+#ifdef DEBUG_RAD
+    Serial.print(millis() - prevSendMs); Serial.print("_");
     Serial.println(__func__);
 #endif
     prevSendMs = millis();
@@ -56,24 +58,23 @@ void WrapRadio::sendTimer(uint32_t ms) {
       if (radio->available()) { // READ ACK
         while (radio->available()) { // OK ACK
           radio->read(ack_msg, SIZE_OF_ACK);
-#ifdef DEBUG_RADIO
+#ifdef DEBUG_RAD
           uint8_t* uint8_t_ack = static_cast<uint8_t*>(ack_msg);
           Serial.print("Answer 0: "); Serial.println((int)uint8_t_ack[BT_ACK_VOLT]); // enter number of byte
           Serial.print("Answer 1: "); Serial.println((int)uint8_t_ack[BT_ACK_WARN]);
-          Serial.print("Answer 2: "); Serial.println((int)uint8_t_ack[BT_ACK_NUME]);
-#endif //DEBUG_RADIO
+#endif //DEBUG_RAD
         }
       }
       else { // NO ACK
-#ifdef DEBUG_RADIO
+#ifdef DEBUG_RAD
         Serial.println("Empty ack");
-#endif //DEBUG_RADIO
+#endif // DEBUG_RAD
       }
     }
     else { // ---> NO CONNECTION <---
-#ifdef DEBUG_RADIO
+#ifdef DEBUG_RAD
       Serial.println("Connection error");
-#endif // DEBUG_RADIO
+#endif // DEBUG_RAD
     }
   }
 }
@@ -87,8 +88,7 @@ Extra::Extra():
 void Extra::flash(uint32_t ms) {
   if (millis() - prevFlashMs >= ms) {
 #ifdef DEBUG_EXTRA
-    Serial.print(millis() - prevFlashMs);
-    Serial.print("_");
+    Serial.print(millis() - prevFlashMs); Serial.print("_");
     Serial.println(__func__);
 #endif
     prevFlashMs = millis();
@@ -102,8 +102,7 @@ void Extra::flash(uint32_t ms) {
 void Extra::getVoltRc(uint32_t ms) {
   if (millis() - prevVoltGetMs >= ms) {
 #ifdef DEBUG_EXTRA
-    Serial.print(millis() - prevVoltGetMs);
-    Serial.print("_");
+    Serial.print(millis() - prevVoltGetMs); Serial.print("_");
     Serial.println(__func__);
 #endif
     prevVoltGetMs = millis();
@@ -120,8 +119,7 @@ void Extra::getVoltRc(uint32_t ms) {
 void Extra::showVoltQuad(LiquidCrystal& lcd, uint32_t ms, uint8_t quadVolt) {
   if (millis() - prevVoltLcdQdMs >= ms) {
 #ifdef DEBUG_EXTRA
-    Serial.print(millis() - prevVoltLcdQdMs);
-    Serial.print("_");
+    Serial.print(millis() - prevVoltLcdQdMs); Serial.print("_");
     Serial.println(__func__);
 #endif
     prevVoltLcdQdMs = millis();
@@ -162,8 +160,7 @@ void Extra::showVoltQuad(LiquidCrystal& lcd, uint32_t ms, uint8_t quadVolt) {
 void Extra::showVoltRemContrl(LiquidCrystal& lcd, uint32_t ms) {
   if (millis() - prevVoltLcdRcMs >= ms) {
 #ifdef DEBUG_EXTRA
-    Serial.print(millis() - prevVoltLcdRcMs);
-    Serial.print("_");
+    Serial.print(millis() - prevVoltLcdRcMs); Serial.print("_");
     Serial.println(__func__);
 #endif
     prevVoltLcdRcMs = millis();
