@@ -80,9 +80,10 @@ void WrapRadio::sendTimer(uint32_t ms) {
 }
 
 Extra::Extra():
-  flashPin(PIN_FLASH), voltPin(PIN_VOLT) {
-  pinMode(flashPin, OUTPUT);
-  pinMode(voltPin, INPUT);
+  pinFlash(PIN_FLASH), pinVolt(PIN_VOLT), pinBuzz(PIN_BUZZER) {
+  pinMode(pinFlash, OUTPUT);
+  pinMode(pinVolt, INPUT);
+  pinMode(pinBuzz, OUTPUT);
 }
 
 void Extra::flash(uint32_t ms) {
@@ -93,9 +94,8 @@ void Extra::flash(uint32_t ms) {
 #endif
     prevFlashMs = millis();
     //_________________________
-    (ledState == LOW) ? ledState = HIGH : ledState = LOW;
-
-    digitalWrite(flashPin, ledState);
+    (stateLed == LOW) ? stateLed = HIGH : stateLed = LOW;
+    digitalWrite(pinFlash, stateLed);
   }
 }
 
@@ -107,7 +107,7 @@ void Extra::getVoltRc(uint32_t ms) {
 #endif
     prevVoltGetMs = millis();
     //_________________________
-    uint16_t readSignal = analogRead(voltPin);
+    uint16_t readSignal = analogRead(pinVolt);
     voltResRc = ((float)readSignal - VOLT_COEFF_B) / VOLT_COEFF_K;
     // in percents
     float diffCurr = voltResRc - VOLT_MIN_RC;
@@ -189,5 +189,26 @@ void Extra::showVoltRemContrl(LiquidCrystal& lcd, uint32_t ms) {
         lcd.print(CharRCntrl[i]);
     }
     lcd.print("V");
+  }
+}
+
+void Extra::buzz(bool isMaxReached, uint32_t ms) {
+  if (isMaxReached) {
+    if (millis() - prevBuzzMs >= ms) {
+#ifdef DEBUG_EXTRA
+      Serial.print(millis() - prevBuzzMs); Serial.print("_");
+      Serial.println(__func__);
+#endif
+      prevBuzzMs = millis();
+      //_________________________
+      if (stateBuzz) {
+        analogWrite(pinBuzz, 1023);
+        stateBuzz = false;
+      }
+      else {
+        analogWrite(pinBuzz, 0);
+        stateBuzz = true;
+      }
+    }
   }
 }

@@ -25,6 +25,7 @@ void setup() {
 void loop() {
   extra.flash(TIME_FLASH_MS); // heart beat
   extra.getVoltRc(TIME_VOLTAGE_MS);
+  extra.buzz(wrapRadio.ack_msg[BT_ACK_WARN], TIME_BUZZER_MS);
 
   extra.showVoltQuad(lcd, TIME_VOLT_LCD_MS, wrapRadio.ack_msg[BT_ACK_VOLT]);
   extra.showVoltRemContrl(lcd, TIME_VOLT_LCD_MS);

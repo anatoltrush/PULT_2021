@@ -28,10 +28,11 @@
 // JOYSTICKS
 #define PIN_JOY_LEFT_X    A0
 #define PIN_JOY_LEFT_Y    A1
-#define PIN_JOY_LEFT_SW   A5
 #define PIN_JOY_RIGHT_X   A3
 #define PIN_JOY_RIGHT_Y   A4
+#define PIN_BUZZER        A5
 #define PIN_JOY_RIGHT_SW  A6
+#define PIN_JOY_LEFT_SW   A7
 
 // <----- PERIODS ----->
 
@@ -43,6 +44,7 @@
 #define TIME_POWER_WARN_MS  400
 #define TIME_CONN_UPD_MS    2000
 #define TIME_CONN_LCD_MS    200
+#define TIME_BUZZER_MS      4
 
 // <----- CONSTANT VALUES ----->
 
