@@ -133,6 +133,7 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     }
     else {
       lcd.write("-");
+      warnState = false;
     }
     lcd.setCursor(15, 0);
     lcd.print(ack_data[BT_ACK_NUME]);

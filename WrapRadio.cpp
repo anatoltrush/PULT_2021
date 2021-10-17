@@ -79,8 +79,7 @@ void WrapRadio::sendTimer(uint32_t ms) {
   }
 }
 
-Extra::Extra():
-  pinFlash(PIN_FLASH), pinVolt(PIN_VOLT), pinBuzz(PIN_BUZZER) {
+Extra::Extra() {
   pinMode(pinFlash, OUTPUT);
   pinMode(pinVolt, INPUT);
   pinMode(pinBuzz, OUTPUT);
