@@ -125,7 +125,7 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
 #endif
     prevMillisWarnMs = millis();
     //_________________________
-    // 1 is max reached & 2 number of motor
+    // 1 isMaxReached & 2 number of motor
     lcd.setCursor(14, 0);
     if (ack_data[BT_ACK_WARN] != 0) {
       (warnState) ? lcd.write("!") : lcd.write(" ");
@@ -143,6 +143,13 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
       lcd.print(ack_data[BT_ACK_POWR]);
     else
       lcd.print("-");
+    // --- raw voltage --- BT_RAW_VLT1 & BT_RAW_VLT2
+    uint8_t rawVoltArr[sizeof (uint16_t)] = {0};
+    rawVoltArr[0] = ack_data[BT_RAW_VLT1];
+    rawVoltArr[1] = ack_data[BT_RAW_VLT2];
+    uint16_t rawVolt = 0;
+    memcpy(&rawVolt, rawVoltArr, sizeof (uint16_t));
+    Serial.print("raw quad volt: "); Serial.print(rawVolt);
   }
 }
 
