@@ -149,7 +149,7 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     rawVoltArr[1] = ack_data[BT_RAW_VLT2];
     uint16_t rawVolt = 0;
     memcpy(&rawVolt, rawVoltArr, sizeof (uint16_t));
-    Serial.print("raw quad volt: "); Serial.print(rawVolt);
+    //Serial.print("raw quad volt: "); Serial.println(rawVolt);
   }
 }
 

@@ -112,6 +112,7 @@ void Extra::getVoltRc(uint32_t ms) {
     float diffCurr = voltResRc - VOLT_MIN_RC;
     voltPercentRc = (diffCurr / diffMinMaxRc) * 100;
     if (voltPercentRc >= 100) voltPercentRc = 99;
+    //Serial.print("rc volt: "); Serial.println(readSignal);
   }
 }
 
@@ -179,7 +180,10 @@ void Extra::showVoltRemContrl(LiquidCrystal& lcd, uint32_t ms) {
     // ---abs---
     lcd.setCursor(5, 1);
     dtostrf(voltResRc, 4, 1, CharRCntrl);
-    if (voltResRc >= 10.0f) {
+    if (voltResRc < 0.0f) {
+      lcd.print("0.0");
+    }
+    else if (voltResRc >= 10.0f) {
       for (int i = 0; i < 4; i++)
         lcd.print(CharRCntrl[i]);
     }
