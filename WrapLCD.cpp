@@ -132,7 +132,7 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     if (ack_data[BT_ACK_WARN] != 0) {
       if(warnState){
         lcd.write("!");
-        analogWrite(pinVibro, POWER_VIBRO);
+        analogWrite(pinVibro, 1023);
       }
       else{
         lcd.write(" ");
