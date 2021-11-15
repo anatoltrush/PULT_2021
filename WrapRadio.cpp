@@ -82,7 +82,6 @@ void WrapRadio::sendTimer(uint32_t ms) {
 Extra::Extra() {
   pinMode(pinFlash, OUTPUT);
   pinMode(pinVolt, INPUT);
-  pinMode(pinBuzz, OUTPUT);
 }
 
 void Extra::flash(uint32_t ms) {
@@ -192,26 +191,5 @@ void Extra::showVoltRemContrl(LiquidCrystal& lcd, uint32_t ms) {
         lcd.print(CharRCntrl[i]);
     }
     lcd.print("V");
-  }
-}
-
-void Extra::buzz(bool isMaxReached, uint32_t ms) {
-  if (isMaxReached) {
-    if (millis() - prevBuzzMs >= ms) {
-#ifdef DEBUG_EXTRA
-      Serial.print(millis() - prevBuzzMs); Serial.print("_");
-      Serial.println(__func__);
-#endif
-      prevBuzzMs = millis();
-      //_________________________
-      if (stateBuzz) {
-        analogWrite(pinBuzz, 1023);
-        stateBuzz = false;
-      }
-      else {
-        analogWrite(pinBuzz, 0);
-        stateBuzz = true;
-      }
-    }
   }
 }

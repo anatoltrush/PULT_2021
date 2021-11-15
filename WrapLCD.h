@@ -19,6 +19,8 @@ class WrapLCD
     void connQuality(LiquidCrystal& lcd, uint8_t quality, uint32_t ms);
 
   private:
+    uint8_t pinVibro = PIN_VIBRO;
+
     uint32_t prevMillisWarnMs = 0;
     uint32_t prevMillisQualMs = 0;
 };

@@ -79,6 +79,8 @@ WrapLCD::WrapLCD(LiquidCrystal& lcd) {
   lcd.createChar(4, lev2);
   lcd.createChar(5, lev3);
   lcd.createChar(6, lev4); // 7 is empty (reserved)
+
+  pinMode(pinVibro, OUTPUT);
 }
 
 void WrapLCD::lcdInitialization(LiquidCrystal& lcd) {
@@ -128,7 +130,14 @@ void WrapLCD::powerACK(LiquidCrystal& lcd, uint8_t* ack_data, uint32_t ms) {
     // 1 isMaxReached & 2 number of motor
     lcd.setCursor(14, 0);
     if (ack_data[BT_ACK_WARN] != 0) {
-      (warnState) ? lcd.write("!") : lcd.write(" ");
+      if(warnState){
+        lcd.write("!");
+        analogWrite(pinVibro, POWER_VIBRO);
+      }
+      else{
+        lcd.write(" ");
+        analogWrite(pinVibro, LOW);
+      }
       warnState = ! warnState;
     }
     else {

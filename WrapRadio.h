@@ -49,7 +49,6 @@ class Extra
 
     void showVoltQuad(LiquidCrystal& lcd, uint32_t ms, uint8_t quadVolt);
     void showVoltRemContrl(LiquidCrystal& lcd, uint32_t ms);
-    void buzz(bool isMaxReached, uint32_t ms);
 
   private:
     char CharQuad[5];
@@ -57,7 +56,6 @@ class Extra
 
     uint8_t pinFlash = PIN_FLASH;
     uint8_t pinVolt  = PIN_VOLT;
-    uint8_t pinBuzz  = PIN_BUZZER;
 
     int16_t voltPercentRc = 0;
     int16_t voltPercentQd = 0;
@@ -66,10 +64,8 @@ class Extra
     uint32_t prevVoltGetMs    = 0;
     uint32_t prevVoltLcdQdMs  = 0;
     uint32_t prevVoltLcdRcMs  = 0;
-    uint32_t prevBuzzMs       = 0;
 
     bool stateLed = false;
-    bool stateBuzz = false;
 
     float diffMinMaxRc = VOLT_MAX_RC - VOLT_MIN_RC;
     float diffMinMaxQd = VOLT_MAX_QD - VOLT_MIN_QD;
