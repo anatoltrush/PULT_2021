@@ -30,8 +30,8 @@
 #define PIN_JOY_LEFT_Y    A1
 #define PIN_JOY_RIGHT_X   A3
 #define PIN_JOY_RIGHT_Y   A4
-#define PIN_VIBRO         A5
-#define PIN_JOY_RIGHT_SW  A6
+#define PIN_VIBRO         A6 // burned
+#define PIN_JOY_RIGHT_SW  A5
 #define PIN_JOY_LEFT_SW   A7
 
 // <----- PERIODS ----->
